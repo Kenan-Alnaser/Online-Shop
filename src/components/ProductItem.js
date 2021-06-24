@@ -11,7 +11,6 @@ const ProductItem = ({ info, addToCart }) => {
       <button
         disabled={inventory === 0}
         onClick={() => {
-          console.log(info);
           addToCart(info);
         }}
       >
