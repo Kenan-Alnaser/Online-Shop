@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Store, StoreContext } from "./context";
 import ProductList from "./components/ProductList";
 
 const App = () => {
-  const [data, setData] = useState(Data);
+  const store = useContext(StoreContext);
+  // const [data, setData] = useState(Data);
   const [userInput, setUserInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -13,7 +14,7 @@ const App = () => {
   const lookUp = () => {
     const userText = userInput.toLocaleLowerCase().trim();
     const userTextLength = userText.length;
-    let newArr = data.filter((item) => {
+    let newArr = store.data.filter((item) => {
       const slicedProductName = item.productName.slice(0, userTextLength);
       return slicedProductName === userText;
     });
@@ -30,7 +31,7 @@ const App = () => {
         <input type="text" onChange={changeHandle} value={userInput} />
         <input type="submit" value="filter" />
       </form>
-      <ProductList data={userInput ? filteredData : data} />
+      <ProductList data={userInput ? filteredData : store} />
     </StoreContext.Provider>
   );
 };
